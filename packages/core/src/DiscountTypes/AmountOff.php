@@ -54,6 +54,7 @@ class AmountOff extends AbstractDiscountType
         $value = (int) bcmul($decimal, $currency->factor);
 
         $lines = $this->getEligibleLines($cart);
+
         $linesSubtotal = $lines->sum(function ($line) {
             return ($line->subTotalDiscounted ?? $line->subTotal)->value;
         });
@@ -224,7 +225,7 @@ class AmountOff extends AbstractDiscountType
     /**
      * Apply the percentage to the cart line.
      */
-    private function applyPercentage(int $value, Cart $cart): Cart
+    private function applyPercentage(float $value, Cart $cart): Cart
     {
         $lines = $this->getEligibleLines($cart);
 

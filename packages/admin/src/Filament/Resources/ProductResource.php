@@ -218,7 +218,9 @@ class ProductResource extends BaseResource
     {
         return TagsComponent::make('tags')
             ->suggestions(Tag::all()->pluck('value')->all())
-            ->label(__('lunarpanel::product.form.tags.label'));
+            ->splitKeys(['Tab', ','])
+            ->label(__('lunarpanel::product.form.tags.label'))
+            ->helperText(__('lunarpanel::product.form.tags.helper_text'));
     }
 
     protected static function getAttributeDataFormComponent(): Component
@@ -300,7 +302,8 @@ class ProductResource extends BaseResource
             ->attributeData()
             ->limitedTooltip()
             ->limit(50)
-            ->label(__('lunarpanel::product.table.name.label'));
+            ->label(__('lunarpanel::product.table.name.label'))
+            ->searchable();
     }
 
     public static function getSkuTableColumn(): Tables\Columns\Column
@@ -323,7 +326,8 @@ class ProductResource extends BaseResource
             })
             ->listWithLineBreaks()
             ->limitList(1)
-            ->toggleable();
+            ->toggleable()
+            ->searchable();
     }
 
     public static function getDefaultRelations(): array
